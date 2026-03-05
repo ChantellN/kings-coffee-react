@@ -1,0 +1,48 @@
+import { createContext, useContext, useState } from 'react';
+
+const OrderContext = createContext();
+
+export const useOrder = () => useContext(OrderContext);
+
+export const OrderProvider = ({ children }) => {
+  const [orderItems, setOrderItems] = useState([]);
+
+  const addItem = (product, quantity = 1) => {
+    setOrderItems((prev) => {
+      const existing = prev.find((item) => item.product.id === product.id);
+      if (existing) {
+        return prev.map((item) =>
+          item.product.id === product.id
+            ? { ...item, quantity: item.quantity + quantity }
+            : item,
+        );
+      }
+      return [...prev, { product, quantity }];
+    });
+  };
+
+  const removeItem = (productId) => {
+    setOrderItems((prev) =>
+      prev.filter((item) => item.product.id !== productId),
+    );
+  };
+
+  const clearOrder = () => {
+    setOrderItems([]);
+  };
+
+  const getOrderTotal = () => {
+    return orderItems.reduce(
+      (total, item) => total + item.product.price * item.quantity,
+      0,
+    );
+  };
+
+  return (
+    <OrderContext.Provider
+      value={{ orderItems, addItem, removeItem, clearOrder, getOrderTotal }}
+    >
+      {children}
+    </OrderContext.Provider>
+  );
+};

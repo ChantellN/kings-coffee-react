@@ -2,6 +2,9 @@ import { Link } from 'react-router-dom';
 import { useOrder } from '../context/OrderContext';
 
 const Navbar = () => {
+  const { orderItems } = useOrder();
+  const totalItems = orderItems.reduce((sum, item) => sum + item.quantity, 0);
+
   return (
     <nav className="bg-stone-900 text-white px-8 py-4 flex justify-between items-center">
       {/* Left - Brand */}

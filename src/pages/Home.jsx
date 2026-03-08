@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import heroBg from '../assets/hero-bg.png';
+import { PRODUCTS } from '../data/products';
+import ProductCard from '../components/ProductCard';
 
 const Home = () => {
   return (
@@ -27,6 +29,21 @@ const Home = () => {
           >
             Explore Our Menu
           </Link>
+        </div>
+      </div>
+      {/* Featured Products */}
+      <div className="max-w-6xl mx-auto px-8 py-16">
+        <h2 className="text-3xl font-bold text-stone-900 mb-2">
+          Featured Products
+        </h2>
+        <p className="text-stone-500 mb-8">
+          Our most loved coffees and equipment
+        </p>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {PRODUCTS.filter((product) => product.featured).map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
         </div>
       </div>
     </div>

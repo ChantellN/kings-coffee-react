@@ -1,4 +1,7 @@
 import v60Img from '../assets/v60.png';
+import castilloImg from '../assets/colombian-coffee.jpeg';
+import honeyImg from '../assets/light-roast.jpg';
+import grinderImg from '../assets/coffee-grinder.jpg';
 
 export const PRODUCTS = [
   {
@@ -41,5 +44,47 @@ export const PRODUCTS = [
     image: 'https://images.unsplash.com/photo-1580915411954-282cb1b0d780',
     description:
       'Our signature espresso blend. Heavy body with a syrupy mouthfeel.',
+  },
+  {
+    id: 'columbian-castillo',
+    name: 'Columbia Castillo Cuaca',
+    roaster: 'Cerulean Coffee',
+    category: 'Whole Bean',
+    price: 25.6,
+    tastingNotes: ['Intense Fruit', 'Chocolate', 'Lime'],
+    roastLevel: 3,
+    stock: 25,
+    featured: false,
+    image: castilloImg,
+    description:
+      'Our special blend with much intensity. Medium body with a sweetness.',
+  },
+  {
+    id: 'honey-sunrise',
+    name: 'Honeysuckle Sunrise',
+    roaster: 'Cerulean Coffee',
+    category: 'Whole Bean',
+    price: 23.5,
+    tastingNotes: ['Honeysuckle', 'Bright Citrus', 'Peach Nectar'],
+    roastLevel: 1,
+    stock: 0,
+    featured: false,
+    image: honeyImg,
+    description:
+      'Our most delicate roast. Light, floral, and perfect as a morning pour-over.',
+  },
+  {
+    id: 'coffee-grinder-v2',
+    name: 'Rise and Grind',
+    roaster: 'Sutchen',
+    category: 'Equipment',
+    price: 42.0,
+    tastingNotes: [],
+    roastLevel: null,
+    stock: 10,
+    featured: false,
+    image: grinderImg,
+    description:
+      'A reliable hand grinder for fresh grounds on demand. Compatible with all brew methods.',
   },
 ];

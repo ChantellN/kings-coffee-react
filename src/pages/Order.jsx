@@ -2,7 +2,8 @@ import { Link } from 'react-router-dom';
 import { useOrder } from '../context/OrderContext';
 
 const Order = () => {
-  const { orderItems, removeItem, clearOrder, getOrderTotal } = useOrder();
+  const { orderItems, updateQuantity, removeItem, clearOrder, getOrderTotal } =
+    useOrder();
   if (orderItems.length === 0) {
     return (
       <div className="min-h-screen bg-stone-50 flex flex-col items-center justify-center">
@@ -53,7 +54,27 @@ const Order = () => {
                   <p className="text-stone-500 text-sm">
                     {item.product.category}
                   </p>
-                  <p className="text-stone-500 text-sm">Qty: {item.quantity}</p>
+                  <div className="flex items-center gap-3 mt-1">
+                    <button
+                      onClick={() =>
+                        updateQuantity(item.product.id, item.quantity - 1)
+                      }
+                      className="w-7 h-7 rounded-full bg-stone-100 hover:bg-stone-200 font-bold text-stone-700 flex items-center justify-center"
+                    >
+                      −
+                    </button>
+                    <span className="font-bold text-stone-900">
+                      {item.quantity}
+                    </span>
+                    <button
+                      onClick={() =>
+                        updateQuantity(item.product.id, item.quantity + 1)
+                      }
+                      className="w-7 h-7 rounded-full bg-stone-100 hover:bg-stone-200 font-bold text-stone-700 flex items-center justify-center"
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
               </div>
               <div className="flex items-center gap-4">

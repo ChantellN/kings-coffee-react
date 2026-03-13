@@ -21,6 +21,15 @@ export const OrderProvider = ({ children }) => {
     });
   };
 
+  const updateQuantity = (productId, quantity) => {
+    if (quantity < 1) return;
+    setOrderItems((prev) =>
+      prev.map((item) =>
+        item.product.id === productId ? { ...item, quantity } : item,
+      ),
+    );
+  };
+
   const removeItem = (productId) => {
     setOrderItems((prev) =>
       prev.filter((item) => item.product.id !== productId),
@@ -40,7 +49,14 @@ export const OrderProvider = ({ children }) => {
 
   return (
     <OrderContext.Provider
-      value={{ orderItems, addItem, removeItem, clearOrder, getOrderTotal }}
+      value={{
+        orderItems,
+        addItem,
+        updateQuantity,
+        removeItem,
+        clearOrder,
+        getOrderTotal,
+      }}
     >
       {children}
     </OrderContext.Provider>

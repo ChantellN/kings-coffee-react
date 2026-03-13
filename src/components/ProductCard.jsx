@@ -17,6 +17,24 @@ const ProductCard = ({ product }) => {
         <span className="text-xs text-amber-600 font-semibold uppercase tracking-wide">
           {product.category}
         </span>
+        {product.roastLevel && (
+          <div className="flex items-center gap-1 mt-1">
+            <span className="text-xs text-stone-400 mr-1">Roast</span>
+            {[1, 2, 3, 4, 5].map((level) => (
+              <span
+                key={level}
+                className={
+                  level <= product.roastLevel
+                    ? 'text-amber-500'
+                    : 'text-stone-200'
+                }
+                style={{ fontSize: '10px' }}
+              >
+                ●
+              </span>
+            ))}
+          </div>
+        )}
         <h3 className="text-lg font-bold text-stone-900 mt-1">
           {product.name}
         </h3>

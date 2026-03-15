@@ -2,8 +2,14 @@ import { Link } from 'react-router-dom';
 import { useOrder } from '../context/OrderContext';
 
 const Order = () => {
-  const { orderItems, updateQuantity, removeItem, clearOrder, getOrderTotal } =
-    useOrder();
+  const {
+    orderItems,
+    updateQuantity,
+    removeItem,
+    clearOrder,
+    getOrderTotal,
+    isThursday,
+  } = useOrder();
   if (orderItems.length === 0) {
     return (
       <div className="min-h-screen bg-stone-50 flex flex-col items-center justify-center">
@@ -94,6 +100,13 @@ const Order = () => {
 
         {/* Order Summary */}
         <div className="bg-white rounded-xl shadow-sm p-6">
+          {isThursday && (
+            <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 mb-4 text-center">
+              <span className="text-amber-600 font-bold">
+                👑 VIP Thursday — 20% off applied!
+              </span>
+            </div>
+          )}
           <div className="flex justify-between items-center mb-6">
             <span className="text-xl font-bold text-stone-900">Total</span>
             <span className="text-2xl font-bold text-amber-600">

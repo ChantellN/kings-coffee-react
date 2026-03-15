@@ -6,6 +6,7 @@ export const useOrder = () => useContext(OrderContext);
 
 export const OrderProvider = ({ children }) => {
   const [orderItems, setOrderItems] = useState([]);
+  const isThursday = new Date().getDay() === 4;
 
   const addItem = (product, quantity = 1) => {
     setOrderItems((prev) => {
@@ -41,10 +42,11 @@ export const OrderProvider = ({ children }) => {
   };
 
   const getOrderTotal = () => {
-    return orderItems.reduce(
+    const total = orderItems.reduce(
       (total, item) => total + item.product.price * item.quantity,
       0,
     );
+    return isThursday ? total * 0.8 : total;
   };
 
   return (
@@ -56,6 +58,7 @@ export const OrderProvider = ({ children }) => {
         removeItem,
         clearOrder,
         getOrderTotal,
+        isThursday,
       }}
     >
       {children}

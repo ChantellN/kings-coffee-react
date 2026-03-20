@@ -1,10 +1,21 @@
 import { useOrder } from '../context/OrderContext';
+import { useState, useEffect } from 'react';
 
 const ProductCard = ({ product }) => {
   const { addItem } = useOrder();
+  const [showToast, setShowToast] = useState(false);
+
+  useEffect(() => {
+    if (showToast) {
+      const timer = setTimeout(() => {
+        setShowToast(false);
+      }, 2500);
+      return () => clearTimeout(timer);
+    }
+  }, [showToast]);
 
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden">
+    <div className="bg-white rounded-xl shadow-md overflow-hidden relative">
       {/* Image */}
       <img
         src={product.image}
@@ -46,7 +57,10 @@ const ProductCard = ({ product }) => {
             ${product.price.toFixed(2)}
           </span>
           <button
-            onClick={() => addItem(product)}
+            onClick={() => {
+              addItem(product);
+              setShowToast(true);
+            }}
             disabled={product.stock === 0}
             className="bg-amber-400 text-stone-900 font-bold px-4 py-2 rounded-full hover:bg-amber-300 disabled:opacity-50 disabled:cursor-not-allowed"
           >
@@ -54,6 +68,11 @@ const ProductCard = ({ product }) => {
           </button>
         </div>
       </div>
+      {showToast && (
+        <div className="absolute top-2/3 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-stone-900 text-white text-sm font-bold px-4 py-2 rounded-full shadow-lg whitespace-nowrap">
+          ✅ Added to order!
+        </div>
+      )}
     </div>
   );
 };

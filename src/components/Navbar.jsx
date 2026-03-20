@@ -6,9 +6,15 @@ const Navbar = () => {
   const totalItems = orderItems.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <nav className="bg-stone-900 text-white px-8 py-4 flex justify-between items-center">
+    <nav className="bg-stone-900 text-white px-8 py-4 flex justify-between items-center sticky top-0 z-50">
       {/* Left - Brand */}
-      <div>King's Coffee</div>
+      {/* Left - Brand */}
+      <Link
+        to="/"
+        className="text-xl font-bold hover:text-amber-400 flex items-center gap-2"
+      >
+        ☕ King's Coffee
+      </Link>
 
       {/* Middle - Links */}
       <div className="flex gap-8">
